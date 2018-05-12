@@ -57,3 +57,12 @@ test('resolve a date', function (t) {
     t.equal(+new Date(1970, 0, 1), +resolved[0])
   })
 })
+
+test('resolve a function', function(t) {
+  t.plan(1)
+
+  var fn = function(){}
+  deepResolve(Promise.resolve(fn)).then(function(resolved) {
+    t.equal(resolved, fn)
+  })
+})

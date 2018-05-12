@@ -2,7 +2,7 @@
 
 module.exports = function deepResolve(p) {
   return Promise.resolve(p).then(function (p) {
-    if (typeof p.length === 'number' && typeof p !== 'string') {
+    if (typeof p.length === 'number' && typeof p === 'object') {
       return Promise.all(p.map(deepResolve))
     } else if (p !== null && typeof p === 'object' && !(p instanceof Date)) {
       var keys = Object.keys(p)
