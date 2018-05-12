@@ -1,0 +1,23 @@
+{
+  "name": "fast-deep-resolve",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabiosantoscode/deep-resolve.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabiosantoscode/deep-resolve/issues"
+  },
+  "homepage": "https://github.com/fabiosantoscode/deep-resolve#readme",
+  "devDependencies": {
+    "tap": "^11.1.5",
+    "tape": "^4.9.0"
+  }
+}
