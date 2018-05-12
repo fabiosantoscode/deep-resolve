@@ -1,6 +1,7 @@
 'use strict'
 
 var test = require('tape')
+var React = require('react')
 var deepResolve = require('.')
 
 test('resolve a number', function(t) {
@@ -18,7 +19,7 @@ test('resolve an object', function(t) {
     foo: Promise.resolve({ bar: Promise.resolve(3) }),
     baz: '123',
     qux: [1, 2, '3', [Promise.resolve(4), {foo: Promise.resolve('bar')}]]
-  }).then(function (resolved) {
+  }).then(function(resolved) {
     t.deepEqual(resolved, {
       foo: {
         bar: 3
@@ -64,5 +65,16 @@ test('resolve a function', function(t) {
   var fn = function(){}
   deepResolve(Promise.resolve(fn)).then(function(resolved) {
     t.equal(resolved, fn)
+  })
+})
+
+test('resolve react elements', function(t) {
+  t.plan(1)
+
+  var Comp = function(){}
+  var el = React.createElement(Comp, {})
+
+  deepResolve(el).then(function(resolved) {
+    t.deepEqual(resolved, el)
   })
 })
