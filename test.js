@@ -4,22 +4,22 @@ var test = require('tape')
 var React = require('react')
 var deepResolve = require('.')
 
-test('resolve a number', function(t) {
+test('resolve a number', function (t) {
   t.plan(1)
 
-  deepResolve(1).then(function(n) {
+  deepResolve(1).then(function (n) {
     t.equal(n, 1)
   })
 })
 
-test('resolve an object', function(t) {
+test('resolve an object', function (t) {
   t.plan(1)
 
   deepResolve({
     foo: Promise.resolve({ bar: Promise.resolve(3) }),
     baz: '123',
     qux: [1, 2, '3', [Promise.resolve(4), {foo: Promise.resolve('bar')}]]
-  }).then(function(resolved) {
+  }).then(function (resolved) {
     t.deepEqual(resolved, {
       foo: {
         bar: 3
@@ -38,7 +38,7 @@ test('resolve an array', function (t) {
     Promise.resolve(2),
     [3],
     Promise.resolve([4])
-  ]).then(function(resolved) {
+  ]).then(function (resolved) {
     t.deepEqual(resolved, [
       1,
       2,
@@ -59,22 +59,22 @@ test('resolve a date', function (t) {
   })
 })
 
-test('resolve a function', function(t) {
+test('resolve a function', function (t) {
   t.plan(1)
 
-  var fn = function(){}
-  deepResolve(Promise.resolve(fn)).then(function(resolved) {
+  var fn = function () {}
+  deepResolve(Promise.resolve(fn)).then(function (resolved) {
     t.equal(resolved, fn)
   })
 })
 
-test('resolve react elements', function(t) {
+test('resolve react elements', function (t) {
   t.plan(1)
 
-  var Comp = function(){}
+  var Comp = function () {}
   var el = React.createElement(Comp, {})
 
-  deepResolve(el).then(function(resolved) {
+  deepResolve(el).then(function (resolved) {
     t.deepEqual(resolved, el)
   })
 })
