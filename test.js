@@ -46,3 +46,14 @@ test('resolve an array', function (t) {
     ])
   })
 })
+
+test('resolve a date', function (t) {
+  t.plan(2)
+
+  deepResolve(Promise.resolve(new Date(1970, 0, 1))).then(function (resolved) {
+    t.equal(+new Date(1970, 0, 1), +resolved)
+  })
+  deepResolve(Promise.resolve([new Date(1970, 0, 1)])).then(function (resolved) {
+    t.equal(+new Date(1970, 0, 1), +resolved[0])
+  })
+})

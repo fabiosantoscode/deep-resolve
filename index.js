@@ -4,7 +4,7 @@ module.exports = function deepResolve(p) {
   return Promise.resolve(p).then(function (p) {
     if (typeof p.length === 'number' && typeof p !== 'string') {
       return Promise.all(p.map(deepResolve))
-    } else if (p !== null && typeof p === 'object') {
+    } else if (p !== null && typeof p === 'object' && !(p instanceof Date)) {
       var keys = Object.keys(p)
       var values = keys.map(function(key) { return deepResolve(p[key]) })
       return Promise.all(values)
