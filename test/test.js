@@ -2,7 +2,7 @@
 
 var test = require('tape')
 var React = require('react')
-var deepResolve = require('.')
+var deepResolve = require('..')
 
 test('resolve a number', function (t) {
   t.plan(1)
@@ -62,7 +62,7 @@ test('resolve a date', function (t) {
 test('resolve a function', function (t) {
   t.plan(1)
 
-  var fn = function () {}
+  var fn = Function.call  // nop
   deepResolve(Promise.resolve(fn)).then(function (resolved) {
     t.equal(resolved, fn)
   })
@@ -71,10 +71,26 @@ test('resolve a function', function (t) {
 test('resolve react elements', function (t) {
   t.plan(1)
 
-  var Comp = function () {}
+  var Comp = Function.call  // nop
   var el = React.createElement(Comp, {})
 
   deepResolve(el).then(function (resolved) {
     t.deepEqual(resolved, el)
+  })
+})
+
+test('reject with errors', function (t) {
+  t.plan(2)
+
+  deepResolve([Promise.reject(4)]).then(function (resolved) {
+    t.fail()
+  }, function(rejection) {
+    t.equal(rejection, 4)
+  })
+
+  deepResolve({foo: Promise.reject('bar')}).then(function (resolved) {
+    t.fail()
+  }, function (rejection) {
+    t.equal(rejection, 'bar')
   })
 })

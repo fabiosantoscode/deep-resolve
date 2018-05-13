@@ -4,9 +4,9 @@
   "description": "Resolve promises, deeply, and without dependencies",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover ./node_modules/.bin/tape test.js",
+    "test": "istanbul cover ./node_modules/.bin/tape test/test.js",
     "precommit": "npm run lint && npm run test",
-    "lint": "standard-format -w index.js test.js"
+    "lint": "standard-format -w index.js test/test.js"
   },
   "repository": {
     "type": "git",
