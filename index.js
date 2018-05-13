@@ -17,7 +17,7 @@ module.exports = function deepResolve (p) {
           return out
         })
     } else {
-      return Promise.resolve(p)
+      return p
     }
   })
 }
