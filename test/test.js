@@ -62,7 +62,7 @@ test('resolve a date', function (t) {
 test('resolve a function', function (t) {
   t.plan(1)
 
-  var fn = Function.call  // nop
+  var fn = Function.call // nop
   deepResolve(Promise.resolve(fn)).then(function (resolved) {
     t.equal(resolved, fn)
   })
@@ -71,7 +71,7 @@ test('resolve a function', function (t) {
 test('resolve react elements', function (t) {
   t.plan(1)
 
-  var Comp = Function.call  // nop
+  var Comp = Function.call // nop
   var el = React.createElement(Comp, {})
 
   deepResolve(el).then(function (resolved) {
@@ -84,7 +84,7 @@ test('reject with errors', function (t) {
 
   deepResolve([Promise.reject(4)]).then(function (resolved) {
     t.fail()
-  }, function(rejection) {
+  }, function (rejection) {
     t.equal(rejection, 4)
   })
 
